@@ -50,7 +50,7 @@ public class SceneController : MonoBehaviour
                     }
                 }
 
-                cells[i, j].GetComponent<Parameters>().SetPosition(i, j);
+                cells[i, j].GetComponent<Stroke>().SetPosition(i, j);
 
                 float posX = (offsetX * i) + startPos.x;
                 float posY = -(offsetY * j) + startPos.y;
@@ -63,9 +63,9 @@ public class SceneController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Parameters.OnClick += Check;
-        Parameters.OnChange += Change;
-        Parameters.OnClear += Clear;
+        Stroke.OnClick += Check;
+        Stroke.OnChange += Change;
+        Stroke.OnClear += Clear;
     }
 
     void Clear() 
@@ -96,8 +96,8 @@ public class SceneController : MonoBehaviour
         cells[a, b] = cells[changeX, changeY];
         cells[changeX, changeY] = _changeTemp;
 
-        cells[changeX, changeY].GetComponent<Parameters>().SetPosition(changeX, changeY);
-        cells[a, b].GetComponent<Parameters>().SetPosition(a, b);
+        cells[changeX, changeY].GetComponent<Stroke>().SetPosition(changeX, changeY);
+        cells[a, b].GetComponent<Stroke>().SetPosition(a, b);
 
 
 
@@ -196,9 +196,9 @@ public class SceneController : MonoBehaviour
 
     private void OnDestroy()
     {
-        Parameters.OnClick -= Check;
-        Parameters.OnChange -= Change;
-        Parameters.OnClear -= Clear;
+        Stroke.OnClick -= Check;
+        Stroke.OnChange -= Change;
+        Stroke.OnClear -= Clear;
     }
 
 }

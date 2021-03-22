@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class Parameters : MonoBehaviour
+public class Stroke : MonoBehaviour
 {
 
     public static Action<int, int, GameObject> OnClick = delegate { };
@@ -13,14 +13,6 @@ public class Parameters : MonoBehaviour
     private int i;
 
     private int j;
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     public void OnMouseDown()
     {
@@ -49,9 +41,4 @@ public class Parameters : MonoBehaviour
         j = b;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -9,6 +9,9 @@ public class SceneController : MonoBehaviour
     [SerializeField] private GameObject _white;
     [SerializeField] private GameObject _empty;
 
+    [SerializeField] private GameObject _winner;
+    [SerializeField] private GameObject _check;
+
     private const float offsetX = 1f;
     private const float offsetY = 1f;
 
@@ -121,9 +124,8 @@ public class SceneController : MonoBehaviour
             }
         }
 
-        WinWhite();
-        WinBlack();
-
+        _winner.GetComponent<Winner>().WinWhite(cells);
+        _winner.GetComponent<Winner>().WinBlack(cells);
     }
 
     void Check(int a, int b, GameObject _c)
@@ -131,67 +133,7 @@ public class SceneController : MonoBehaviour
         changeX = a;
         changeY = b;
 
-        if ((b != 0))
-        {
-            if ((cells[a, b - 1].tag == "0"))
-            {
-                cells[a, b - 1].GetComponent<SpriteRenderer>().enabled = true;
-                cells[a, b - 1].GetComponent<SpriteRenderer>().material.color = Color.green * 10f;
-                cells[a, b - 1].tag = "3";
-            }
-        }
-        if (b<7){ 
-            if ((cells[a, b + 1].tag == "0"))
-            {
-                cells[a, b + 1].GetComponent<SpriteRenderer>().enabled = true;
-                cells[a, b + 1].GetComponent<SpriteRenderer>().material.color = Color.green * 10f;
-                cells[a, b + 1].tag = "3"; 
-            }
-        }
-        if (a < 7) { 
-            if ((cells[a + 1, b].tag == "0"))
-            { 
-                cells[a + 1, b].GetComponent<SpriteRenderer>().enabled = true;
-                cells[a + 1, b].GetComponent<SpriteRenderer>().material.color = Color.green * 10f;
-                cells[a + 1, b].tag = "3";
-            }
-        }
-        if (a !=0)
-        {
-            if ((cells[a - 1, b].tag == "0") )
-            {
-                cells[a - 1, b].GetComponent<SpriteRenderer>().enabled = true;
-                cells[a - 1, b].GetComponent<SpriteRenderer>().material.color = Color.green * 10f;
-                cells[a - 1, b].tag = "3";
-            }
-        }
-    }
-
-    private void WinBlack() 
-    {
-        for (int i = 5; i < 8; i++)
-        {
-            for (int j = 5; j < 8; j++)
-            {
-                if (cells[i, j].tag == "-1") { }
-                else return;
-            }
-        }
-        Debug.Log("Победа Чёрных!");
-    }
-
-    private void WinWhite() 
-    {
-
-        for (int i = 0; i < 3; i++) 
-        {
-            for (int j = 0; j < 3; j++) 
-            {
-                if (cells[i, j].tag == "1") { }
-                else return ;
-            }
-        }
-        Debug.Log("Победа Белых!");
+        _check.GetComponent<Check>().CheckGoes(a, b, _c, cells);
     }
 
     private void OnDestroy()
